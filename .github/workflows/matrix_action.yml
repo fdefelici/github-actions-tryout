@@ -14,17 +14,20 @@ jobs:
             - os: macos-latest
               SHELL: bash
               LIST_DIR: ls -la
+              SEP: /
             - os: ubuntu-latest
               SHELL: bash
               LIST_DIR: ls -la
+              SEP: /
             - os: windows-latest
               SHELL: cmd
               LIST_DIR: dir /a
+              SEP: \
       defaults:
         run:
           shell: ${{ matrix.SHELL }}
       env:
-        BUILD_DIR: ${{ github.workspace }}/build
+        BUILD_DIR: ${{ github.workspace }}${{ matrix.SEP }}build
       steps:
         - run: echo "Hello from ${{ matrix.os }}"
         - name: Checkout branch
@@ -39,5 +42,5 @@ jobs:
             echo ""
             cmake --build ${{env.BUILD_DIR}} --config Release
             ${{matrix.LIST_DIR}} ${{env.BUILD_DIR}}
-            ${{env.BUILD_DIR}}/TravisExec
+            ${{env.BUILD_DIR}}${{ matrix.SEP }}TravisExec
             
