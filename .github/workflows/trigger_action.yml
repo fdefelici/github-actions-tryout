@@ -1,4 +1,4 @@
-name: My Matrix Action
+name: My Trigger Action
 
 on:
   push:
