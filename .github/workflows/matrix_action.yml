@@ -37,7 +37,7 @@ jobs:
             echo ""
             cmake -B${{env.BUILD_DIR}}
             echo ""
-            cmake --build ${{env.BUILD_DIR}} --config Release --target all
+            cmake --build ${{env.BUILD_DIR}} --config Release
             ${{matrix.LIST_DIR}} ${{env.BUILD_DIR}}
             ${{env.BUILD_DIR}}/TravisExec
             
