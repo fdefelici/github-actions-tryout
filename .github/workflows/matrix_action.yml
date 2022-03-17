@@ -7,8 +7,7 @@ on:
 jobs:
   my-matrix-job:
       runs-on: ${{ matrix.os }}
-      env:
-        BUILD_DIR: ${{ github.workspace }}${{ matrix.SEP }}build
+
       strategy:
         matrix:
           os: [macos-latest, ubuntu-latest, windows-latest]
@@ -17,21 +16,22 @@ jobs:
               SHELL: bash
               LIST_DIR: ls -la
               SEP: /
-              EXEC: ${{env.BUILD_DIR}}/TravisExec
+              EXEC: TravisExec
             - os: ubuntu-latest
               SHELL: bash
               LIST_DIR: ls -la
               SEP: /
-              EXEC: ${{env.BUILD_DIR}}/TravisExec
+              EXEC: TravisExec
             - os: windows-latest
               SHELL: cmd
               LIST_DIR: dir /a
               SEP: \
-              EXEC: ${{env.BUILD_DIR}}\Release\TravisExec.exe
+              EXEC: Release\TravisExec.exe
       defaults:
         run:
           shell: ${{ matrix.SHELL }}
-      
+      env:
+        BUILD_DIR: ${{ github.workspace }}${{ matrix.SEP }}build
       steps:
         - run: echo "Hello from ${{ matrix.os }}"
         - name: Checkout branch
@@ -46,5 +46,5 @@ jobs:
             echo ""
             cmake --build ${{env.BUILD_DIR}} --config Release
             ${{matrix.LIST_DIR}} ${{env.BUILD_DIR}}
-             ${{matrix.EXEC}}
+            ${{env.BUILD_DIR}}${{matrix.SEP}}${{matrix.EXEC}}
             
