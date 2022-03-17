@@ -5,9 +5,8 @@ on:
       branches: [ matrix ]
 
 jobs:
-  my-matrix-job:
+  build:
       runs-on: ${{ matrix.os }}
-
       strategy:
         matrix:
           os: [macos-latest, ubuntu-latest, windows-latest]
@@ -47,4 +46,12 @@ jobs:
             cmake --build ${{env.BUILD_DIR}} --config Release
             ${{matrix.LIST_DIR}} ${{env.BUILD_DIR}}
             ${{env.BUILD_DIR}}${{matrix.SEP}}${{matrix.EXEC}}
-            
+  release:
+    if:  
+    name: Create Github Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v2
+      
