@@ -3,3 +3,4 @@ os: freebsd
 scripts:
  - ls -la
  - cmake .
+ - ls -la
