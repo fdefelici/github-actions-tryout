@@ -23,6 +23,8 @@ jobs:
       defaults:
         run:
           shell: ${{ matrix.SHELL }}
+      env:
+        BUILD_DIR: ${{ github.workspace }}/build
       steps:
         - run: echo "Hello from ${{ matrix.os }}"
         - name: Checkout branch
@@ -33,10 +35,9 @@ jobs:
           run: |
             cmake --version
             echo ""
-            BUILD_DIR=${{ github.workspace }}/build
-            cmake -B$BUILD_DIR
+            cmake -B${{env.BUILD_DIR}}
             echo ""
-            cmake --build $BUILD_DIR --config Release --target all
-            ${{matrix.LIST_DIR}} $BUILD_DIR/
-            $BUILD_DIR/TravisExec
+            cmake --build ${{env.BUILD_DIR}} --config Release --target all
+            ${{matrix.LIST_DIR}} ${{env.BUILD_DIR}}
+            ${{env.BUILD_DIR}}/TravisExec
             
