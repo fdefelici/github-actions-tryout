@@ -23,4 +23,5 @@ jobs:
             echo ""
             cmake --build $BUILD_DIR --config Release --target all
             ls -la $BUILD_DIR/
+            $BUILD_DIR/TravisExec
             
