@@ -13,9 +13,11 @@ jobs:
         - name: Checkout branch
           uses: actions/checkout@v2
         - name: List Workspace
-          run: ls ${{ github.workspace }}
+          run: ls -la ${{ github.workspace }}
         - name: CMake 
           run: |
             cmake --version
+            echo ""
             cmake .
-            ls ${{ github.workspace }}
+            echo ""
+            ls -la ${{ github.workspace }}
