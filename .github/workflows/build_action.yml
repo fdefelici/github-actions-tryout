@@ -12,4 +12,7 @@ jobs:
       steps:
         - name: Checkout branch
           uses: actions/checkout@v2
-        - run: ls ${{ github.workspace }}
+        - name: List Workspace
+          run: ls ${{ github.workspace }}
+        - name: CMake 
+          run: cmake --version
