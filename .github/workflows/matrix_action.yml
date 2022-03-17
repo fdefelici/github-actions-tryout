@@ -1,0 +1,27 @@
+name: My Matrix Action
+
+on:
+  push:
+      branches: [ matrix ]
+
+jobs:
+  my-matrix-job:
+      runs-on: ${{ matrix.os }}
+      os: [macos-latest, ubuntu-latest]
+      steps:
+        - run: echo "Hello from ${{ matrix.os }}"
+        - name: Checkout branch
+          uses: actions/checkout@v2
+        - name: List Workspace
+          run: ls -la ${{ github.workspace }}
+        - name: CMake 
+          run: |
+            cmake --version
+            echo ""
+            BUILD_DIR=${{ github.workspace }}/build
+            cmake -B$BUILD_DIR
+            echo ""
+            cmake --build $BUILD_DIR --config Release --target all
+            ls -la $BUILD_DIR/
+            $BUILD_DIR/TravisExec
+            
