@@ -21,6 +21,6 @@ jobs:
             BUILD_DIR=${{ github.workspace }}/build
             cmake -B$BUILD_DIR
             echo ""
-            cmake --build $BUILD_DIR --config Release
+            cmake --build $BUILD_DIR --config Release --target all
             ls -la $BUILD_DIR/
             
