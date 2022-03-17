@@ -1,0 +1,5 @@
+language: c
+os: freebsd
+scripts:
+ - ls -la
+ - cmake .
