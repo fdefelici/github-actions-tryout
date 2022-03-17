@@ -18,6 +18,9 @@ jobs:
           run: |
             cmake --version
             echo ""
-            cmake .
+            BUILD_DIR=${{ github.workspace }}/build
+            cmake -B$BUILD_DIR
             echo ""
-            ls -la ${{ github.workspace }}/CMakeFiles
+            cmake --build $BUILD_DIR --config Release
+            ls -la $BUILD_DIR/Release
+            $BUILD_DIR/Release/TravisExec
