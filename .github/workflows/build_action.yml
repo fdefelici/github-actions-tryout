@@ -15,4 +15,7 @@ jobs:
         - name: List Workspace
           run: ls ${{ github.workspace }}
         - name: CMake 
-          run: cmake --version
+          run: |
+            cmake --version
+            cmake .
+            ls ${{ github.workspace }}
