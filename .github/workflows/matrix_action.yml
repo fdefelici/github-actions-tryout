@@ -10,12 +10,20 @@ jobs:
       strategy:
         matrix:
           os: [macos-latest, ubuntu-latest, windows-latest]
+          include:
+            - os: macos-latest
+              LIST_DIR: ls -la
+            - os: ubuntu-latest
+              LIST_DIR: ls -la
+            - os: windows-latest
+              LIST_DIR: dir /a
+
       steps:
         - run: echo "Hello from ${{ matrix.os }}"
         - name: Checkout branch
           uses: actions/checkout@v2
         - name: List Workspace
-          run: ls -la ${{ github.workspace }}
+          run: $LIST_DIR ${{ github.workspace }}
         - name: CMake 
           run: |
             cmake --version
@@ -24,6 +32,6 @@ jobs:
             cmake -B$BUILD_DIR
             echo ""
             cmake --build $BUILD_DIR --config Release --target all
-            ls -la $BUILD_DIR/
+            $LIST_DIR $BUILD_DIR/
             $BUILD_DIR/TravisExec
             
