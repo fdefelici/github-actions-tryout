@@ -12,12 +12,17 @@ jobs:
           os: [macos-latest, ubuntu-latest, windows-latest]
           include:
             - os: macos-latest
+              SHELL: bash
               LIST_DIR: ls -la
             - os: ubuntu-latest
+              SHELL: bash
               LIST_DIR: ls -la
             - os: windows-latest
+              SHELL: cmd
               LIST_DIR: dir /a
-
+      defaults:
+        run:
+          shell: ${{ matrix.SHELL }}
       steps:
         - run: echo "Hello from ${{ matrix.os }}"
         - name: Checkout branch
