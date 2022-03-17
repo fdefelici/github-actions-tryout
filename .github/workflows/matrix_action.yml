@@ -7,6 +7,8 @@ on:
 jobs:
   my-matrix-job:
       runs-on: ${{ matrix.os }}
+      env:
+        BUILD_DIR: ${{ github.workspace }}${{ matrix.SEP }}build
       strategy:
         matrix:
           os: [macos-latest, ubuntu-latest, windows-latest]
@@ -29,8 +31,7 @@ jobs:
       defaults:
         run:
           shell: ${{ matrix.SHELL }}
-      env:
-        BUILD_DIR: ${{ github.workspace }}${{ matrix.SEP }}build
+      
       steps:
         - run: echo "Hello from ${{ matrix.os }}"
         - name: Checkout branch
